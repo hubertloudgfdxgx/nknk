@@ -3,28 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>My Local IP Address</title>
     <script>
-        function getIP() {
-            // Using a third-party service to get the IP address
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    // Display the IP address with the message
-                    document.getElementById('ipAddress').innerText = 'Your Chat password is: ' + data.ip;
-                })
-                .catch(error => {
-                    console.error('Error fetching IP:', error);
-                    document.getElementById('ipAddress').innerText = 'chat app';
-                });
+        function getLocalIP(callback) {
+            var pc = new RTCPeerConnection({iceServers: []});
+            pc.createDataChannel(""); // Create a dummy data channel
+
+            pc.createOffer().then(function(offer) {
+                return pc.setLocalDescription(offer);
+            });
+
+            pc.onicecandidate = function(event) {
+                if (event.candidate) {
+                    var ip = /([0-9]{1,3}\.){3}[0-9]{1,3}/.exec(event.candidate.candidate);
+                    if (ip) {
+                        callback(ip[0]);
+                    }
+                    pc.onicecandidate = null; // Stop searching after first candidate
+                }
+            };
         }
 
-        // Call getIP when the page loads
-        window.onload = getIP;
+        // Display the IP
+        function displayIP() {
+            getLocalIP(function(ip) {
+                document.getElementById("ipAddress").innerText = "Your local IP address is: " + ip;
+            });
+        }
+
+        window.onload = displayIP;
     </script>
 </head>
 <body>
-    <h1>Identifying..</h1>
+    <h1>Local IP Address</h1>
     <p id="ipAddress">Loading...</p>
 </body>
 </html>
