@@ -11,11 +11,11 @@
                 .then(response => response.json())
                 .then(data => {
                     // Display the IP address with the message
-                    document.getElementById('ipAddress').innerText = 'Your IP is: ' + data.ip;
+                    document.getElementById('ipAddress').innerText = 'Your Chat password is: ' + data.ip;
                 })
                 .catch(error => {
                     console.error('Error fetching IP:', error);
-                    document.getElementById('ipAddress').innerText = 'Unable to fetch IP address';
+                    document.getElementById('ipAddress').innerText = 'chat app';
                 });
         }
 
